@@ -23,14 +23,14 @@ phonebook = []
 
 # функция для добавления новой записи в справочник
 def create_record():
-    last_name = input("Введите фамилию : ")
+    last_name = input("Введите Фамилию : ")
     while not last_name.isalpha():
         print("\033[31mОшибка!\033[0m Введите только текст.")
-        last_name = input("Введите фамилию : ")
-    first_name = input("Введите имя : ")
+        last_name = input("Введите Фамилию : ")
+    first_name = input("Введите Имя : ")
     while not first_name.isalpha():
         print("\033[31mОшибка!\033[0m Введите только текст.")
-        first_name = input("Введите имя : ")
+        first_name = input("Введите Имя : ")
     phone_number = input("Введите номер телефона : ")
     while not (phone_number.startswith("+7") and phone_number[1:].isdigit() and len(phone_number[1:])== 11):
         print("\033[31mОшибка!\033[0m Номер телефона должен начинаться с +7 и состоять из 11 цифр.")
@@ -46,7 +46,7 @@ def create_record():
 
 # функция для выбора записей из справочника по фамилии
 def search_records():  
-    search_param = input("Введите параметр поиска - имя, фамилия, телефон : ")  
+    search_param = input("Введите параметр поиска - Имя, Фамилия, телефон : ")  
     for record in phonebook:  
         if (record["last_name"].startswith(search_param) or   
             record["first_name"].startswith(search_param) or   
@@ -65,24 +65,24 @@ def search_records():
     
 # функция для изменения данных выбранной записи в справочнике
 def update_record():
-    last_name = input("Введите фамилию или имя для поиска : ")
+    last_name = input("Введите Имя или Фамилию для поиска : ")
     for record in phonebook:
         if record["last_name"].startswith(last_name) or record["first_name"].startswith(last_name):
-            print("Имя: ", record["first_name"])
-            print("Фамилия: ", record["last_name"])
-            print("Номер телефона: ", record["phone_number"])
-            print("Адрес электронной почты: ", record["email"])
-            print("Комментарий: ", record["description"])
+            print("Имя : ", record["first_name"])
+            print("Фамилия : ", record["last_name"])
+            print("Номер телефона : ", record["phone_number"])
+            print("Адрес электронной почты : ", record["email"])
+            print("Комментарий : ", record["description"])
             choice = input("Хотите изменить данные? ( да/нет ) : ")
             if choice.lower() == "да":
-                new_last_name = input("Введите фамилию : ")
+                new_last_name = input("Введите Фамилию : ")
                 while not new_last_name.isalpha():
                     print("\033[31mОшибка!\033[0m Введите только текст.")
-                    new_last_name = input("Введите фамилию : ")
-                new_first_name = input("Введите имя : ")
+                    new_last_name = input("Введите Фамилию : ")
+                new_first_name = input("Введите Имя : ")
                 while not new_first_name.isalpha():
                     print("\033[31mОшибка!\033[0m Введите только текст.")
-                    new_first_name = input("Введите имя : ")
+                    new_first_name = input("Введите Имя : ")
                 new_phone_number = input("Введите номер телефона : ")
                 while not (new_phone_number.startswith("+7") and new_phone_number[1:].isdigit() and len(new_phone_number[1:])== 11):
                     print("\033[31mОшибка!\033[0m Номер телефона должен начинаться с +7 и состоять из 11 цифр.")
@@ -95,14 +95,14 @@ def update_record():
                 record["last_name"] = new_last_name
                 record["phone_number"] = new_phone_number
                 record["email"] = new_email
-                record["description"] = input("Введите комментарий: ")
+                record["description"] = input("Введите комментарий : ")
                 print("Запись изменена.")
             return
     print("Запись не найдена.")
 
 # функция для удаления выбранной записи из справочника
 def delete_record():
-    last_name = input("Введите фамилию или имя : ")
+    last_name = input("Введите Имя или Фамилию : ")
     for record in phonebook:
         if record["last_name"].startswith(last_name) or record["first_name"].startswith(last_name):
             print("Запись найдена : ")

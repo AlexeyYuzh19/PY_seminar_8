@@ -64,15 +64,39 @@ def search_records():
     print("Запись не найдена.")
     
 # функция для изменения данных выбранной записи в справочнике
-def update_record():    
-    last_name = input("Введите фамилию : ")    
+def update_record():
+    last_name = input("Введите фамилию или имя для поиска : ")
     for record in phonebook:
-        if record["last_name"] == last_name:            
-            record["first_name"] = input("Введите имя : ")
-            record["phone_number"] = input("Введите номер телефона : ")
-            record["email"] = input("Введите адрес электронной почты : ")
-            record["description"] = input("Введите коментарий : ")
-            print("Запись изменена.")
+        if record["last_name"].startswith(last_name) or record["first_name"].startswith(last_name):
+            print("Имя: ", record["first_name"])
+            print("Фамилия: ", record["last_name"])
+            print("Номер телефона: ", record["phone_number"])
+            print("Адрес электронной почты: ", record["email"])
+            print("Комментарий: ", record["description"])
+            choice = input("Хотите изменить данные? ( да/нет ) : ")
+            if choice.lower() == "да":
+                new_last_name = input("Введите фамилию : ")
+                while not new_last_name.isalpha():
+                    print("\033[31mОшибка!\033[0m Введите только текст.")
+                    new_last_name = input("Введите фамилию : ")
+                new_first_name = input("Введите имя : ")
+                while not new_first_name.isalpha():
+                    print("\033[31mОшибка!\033[0m Введите только текст.")
+                    new_first_name = input("Введите имя : ")
+                new_phone_number = input("Введите номер телефона : ")
+                while not (new_phone_number.startswith("+7") and new_phone_number[1:].isdigit() and len(new_phone_number[1:])== 11):
+                    print("\033[31mОшибка!\033[0m Номер телефона должен начинаться с +7 и состоять из 11 цифр.")
+                    new_phone_number = input("Введите номер телефона : ")
+                new_email = input("Введите адрес электронной почты : ")
+                while not (new_email.count("@") == 1 and new_email.count(".") >= 1):
+                    print("\033[31mОшибка!\033[0m Введите корректный адрес электронной почты.")
+                    new_email = input("Введите адрес электронной почты : ")
+                record["first_name"] = new_first_name
+                record["last_name"] = new_last_name
+                record["phone_number"] = new_phone_number
+                record["email"] = new_email
+                record["description"] = input("Введите комментарий: ")
+                print("Запись изменена.")
             return
     print("Запись не найдена.")
 
